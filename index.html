@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Babek's Steak House</title>
+
+    <meta name="description" content="Restoran işletin ve zengin olun. Gerçekçi bir simülasyon oyunu." />
+    <meta name="keywords" content="yemek yapma oyunu, oyunlar, restoran oyunu" />
+    <meta name="author" content="Enes Babekoğlu">
+    <meta property="og:title" content="Babek's Steak House">
+    <meta property="og:site_name" content="Babek's Steak House">
+
+    <link rel="icon" type="image/png" href="images/icon.png">
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+    <nav>
+        <div class="logo">
+            <img src="images/logo.png" alt="Logo">
+        </div>
+        <ul class="nav-links">
+            <li><a onclick="sayfaDegistir('oyna');"><img src="images/play.png" alt="Oyna"> <text id="menu_text_oyna">Oyna</text></a></li>
+            <li><a onclick="sayfaDegistir('nasilOynanir');"><img src="images/nasil.png" alt="Soru İşareti"> <text id="menu_text_nasil_oynanir">Nasıl Oynanır?</text></a></li>
+            <li><a target="_blank" href="https://github.com/enesbabekoglu/javascript-canvas-restoran-oyunu"><img src="images/github.png" alt="Github"> Github</a></li>
+            <li><a onclick="closeModal(); openModal('dil_modal');"><img src="images/diller/tr.png" alt="Dil" id="dilButton"> <text id="dilAdi">Türkçe</text></a></li>
+        </ul>
+    </nav>
+
+    <div class="sayfa">
+        
+        <div class="oyun-ekrani">
+
+            <div id="gameDiv">
+                <div>
+                <img src="images/logo.png" alt="Oyna" style="width: 450px;"><br>
+                <p style="display: none;" id="yukleniyor"></p>
+                <img id="playButton" src="images/butonlar/oynat.png" alt="Oyna" class="animasyonluResim"><br><br>
+                <img src="images/animasyonlar/karakter/Idle (3).png" alt="Karakter Giriş" id="oyun_acilis_animasyonu" style="width: 300px; margin-left: -50px;"><br>
+                <p>Copyright All Reserved &copy;2024 Enes Babekoğlu</p>
+                </div>
+            </div>
+
+            <div id="playDiv" style="display: none;">
+
+                <div class="header">
+                    <div class="topbar">
+                        <ul class="menu" id="menu" style="display: none;">
+
+                            <li style="width: 70%; display: flex; justify-content: space-between;">
+                                <div style="flex: 4;">
+                                    <img src="images/eller.png" alt="Eller" class="img-1">
+                                    <span onclick="elineAl(0, 0); return false;" class="span-1" id="elimizdeki"></span>
+                                </div>
+                                <div style="flex: 3;">
+                                    <img src="images/urunler/cash.png" alt="Altın" class="img-2">
+                                    <span class="span-2"><text id="cash">0.00</text> $</span>
+                                </div>
+                                <div style="flex: 2;">
+                                    <img src="images/urunler/yildiz.png" alt="Yıldız" class="img-2">
+                                    <span class="span-2" id="yildiz">0</span>
+                                </div>
+                            </li>
+                            
+                            <li style="width: 30%; text-align: right;">
+                                <img src="images/butonlar/market.png" alt="Market" onclick="openModal('market_modal');" id="marketButton" style="width: 35px; height: 35px;">
+                                <img src="images/butonlar/kapali.png" alt="Dükkan Açık/Kapalı" onclick="dukkanAcKapat(1);" id="dukkanStatu" style="height: 35px;">
+                                <img src="images/butonlar/ses.png" alt="Ses" onclick="sesAyarla('ses');" id="ses" style="width: 35px; height: 35px;">
+                                <img src="images/butonlar/muzik.png" alt="Müzik" onclick="sesAyarla('muzik');" id="muzik" style="width: 35px; height: 35px;">
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+
+                <canvas id="gameCanvas" width="900" height="800"></canvas>
+
+            </div>
+
+            <div id="nasilOynanir">
+                <div style="text-align: left;" id="nasilOynanirIcerik"></div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="modals">
+
+        <div id="dil_modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header"><div><text id="dil_degistir_adi">Diller</text> <span onclick="closeModal();"><img src="images/butonlar/carpi.png" alt="Kapat"></span></div></div>
+                <center>
+                    <div class="urunler" id="diller">
+                        <img src="images/diller/tr.png" alt="Türkçe" onclick="dilDegistir('tr');">
+                        <img src="images/diller/en.png" alt="İngilizce" onclick="dilDegistir('en');">
+                        <img src="images/diller/ru.png" alt="Rusça" onclick="dilDegistir('ru');">
+                    </div>
+                </center>
+            </div>
+        </div>
+
+        <div id="dolap_modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header"><div><text id="dolap_adi"></text> <span onclick="closeModal();"><img src="images/butonlar/carpi.png" alt="Kapat"></span></div></div>
+                <center><div class="urunler" id="dolap_urunler"></div></center>
+            </div>
+        </div>
+
+        <div id="hazir_urunler_modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header"><div><text id="hazirlanmis_urunler_dolap_adi"></text> <span onclick="closeModal();"><img src="images/butonlar/carpi.png" alt="Kapat"></span></div></div>
+                <center><div class="urunler" id="hazirlanmis_urunler_dolap_urunler"></div></center>
+            </div>
+        </div>
+
+        <div id="yeni_siparisler_modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header"><div><text id="yeni_siparisler_adi"></text> <span onclick="closeModal();"><img src="images/butonlar/carpi.png" alt="Kapat"></span></div></div>
+                <center><div class="yeni_siparisler" id="yeni_siparisler"></div></center>
+            </div>
+        </div>
+
+        <div id="teslim_noktasi_modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header"><div><text id="teslim_noktasi_adi"></text> <span onclick="closeModal();"><img src="images/butonlar/carpi.png" alt="Kapat"></span></div></div>
+                <center><div class="yeni_siparisler" id="teslim_noktasi"></div></center>
+            </div>
+        </div>
+
+        <div id="hazirlama_alani_modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header"><div><text id="hazirlama_alani_adi"></text> <span onclick="closeModal();"><img src="images/butonlar/carpi.png" alt="Kapat"></span></div></div>
+                <center><div class="yeni_siparisler" id="hazirlama_alani"></div></center>
+            </div>
+        </div>
+
+        <div id="market_modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header"><div><text id="market_adi">Market</text> <span onclick="closeModal('market_modal');"><img src="images/butonlar/carpi.png" alt="Kapat"></span></div></div>
+                <center><div class="market_urunler" id="market_urunler"></div></center>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="lang.js"></script>
+    <script src="global-veriables.js"></script>
+    <script src="general-functions.js"></script>
+    <script src="splash.js"></script>
+    <script src="game-engine.js"></script>
+    <script src="sounds.js"></script>
+
+</body>
+</html>

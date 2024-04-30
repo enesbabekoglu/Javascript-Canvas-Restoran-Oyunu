@@ -1,0 +1,679 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    padding: 0px;
+    background: #375145;
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+nav {
+    background-color: #333;
+    padding: 20px;
+    margin: 0px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.logo img {
+    width: 150px;
+}
+
+.nav-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+.nav-links li {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.nav-links li a img {
+    margin-right: 10px;
+    width: 30px;
+    height: 30px;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: #fff;
+    display: flex;
+    align-items: center;
+}
+
+.nav-links li a:hover {
+    color: #ff7f50;
+}
+
+.nav-links li:last-child {
+    margin-right: 0;
+}
+
+#gameContainer {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#gameDiv {
+    display: block;
+    width: 900px;
+    height: 800px;
+    border: 0px solid black;
+    background-image: url("images/mobilyalar/mutfak-bg.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 15px;
+} 
+
+canvas {
+    border: 0px solid black;
+    background-image: url("images/mobilyalar/mutfak-bg.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 15px;
+}
+
+.header {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.topbar {
+    background: rgb(2,0,36);
+    background: linear-gradient(0deg, rgba(2,0,36,0) 0%, rgba(255,255,255,1) 100%);
+    color: #fff;
+    width: 900px;
+    height: auto;
+    min-height: 75px;
+    display: block;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    margin-bottom: -75px; 
+    z-index: 3;
+}
+
+.menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+.menu li {
+    margin: 0px;
+    padding: 10px;
+    user-select: none;
+}
+
+.menu li div{
+    position: relative; 
+    display: flex; 
+    align-items: center; 
+    color: #ffffff; 
+    background: rgb(196,159,238); 
+    background: linear-gradient(180deg, rgba(196,159,238,1) 0%, rgba(38,28,158,1) 100%); 
+    padding: 0px; 
+    font-size: 12px; 
+    border-radius: 10px;  
+    margin-right: 10px;
+}
+
+.menu li div .img-1{
+    width: 20px; 
+    height: 20px; 
+    margin-right: 10px; 
+    margin-left: 10px;
+}
+
+.menu li div .img-2{
+    width: 50px; 
+    height: 50px; 
+    margin-right: 10px; 
+    position: absolute; 
+    left: 0px; 
+    top: -5px;
+}
+
+.menu li div .span-1{
+    background-color: rgba(0, 0, 0, 0.3); 
+    display: flex; 
+    align-items: center; 
+    font-size: 13px; 
+    border-radius: 10px; 
+    padding: 5px 15px 5px 15px;
+}
+
+.menu li div .span-2{
+    position: absolute; 
+    right: 5px; 
+    background-color: #1b1740; 
+    border: 3px solid #4830d0; 
+    font-size: 16px; 
+    font-weight: 900; 
+    border-radius: 10px; 
+    padding: 5px 15px 5px 15px;
+}
+
+.menu li img:hover{
+    transform: scale(0.9);
+    opacity: 0.8;
+}
+
+.menu li img:active {
+    opacity: 1;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+    transform: 400ms;
+    justify-content: center; align-items: center;
+}
+
+.modal-content {
+    background: rgb(122,0,173);
+    background: linear-gradient(90deg, rgba(122,0,173,1) 0%, rgba(34,9,94,1) 100%);
+    padding: 0px;
+    border: 0px solid;
+    width: 500px;
+    min-width: 500px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.6);
+    z-index: 5;
+}
+
+.modal-content .modal-header{
+    background: rgb(164,131,187);
+    background: linear-gradient(180deg, rgba(164,131,187,1) 0%, rgba(20,11,81,1) 50%, rgba(20,11,81,1) 100%);
+    color: white;
+    width: 520px;
+    margin: 0px;
+    margin-left: -15px;
+    padding: 5px;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 800;
+    height: 67px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.6);
+    user-select: none;
+    position: relative;
+}
+
+.modal-content .modal-header img{
+    position: absolute;
+    right: 16px;
+    top: 16px;
+}
+
+.modal-content .modal-header img:hover{
+    transform: scale(0.9);
+    opacity: 0.8;
+}
+
+.modal-content .modal-header img:active {
+    opacity: 1;
+}
+
+.modal-content .modal-header div{
+    border: 3px solid #c3c3f1; 
+    border-radius: 15px; 
+    padding: 15px; 
+    background: transparent; 
+    margin: 0px; 
+    margin-bottom: 10px;
+}
+
+.modal-content .modal-header span {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.modal-content .modal-header span:hover,
+.modal-content .modal-header span:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-content .modal-header span img {
+    height: 30px;
+    width: 30px;
+}
+
+.yeni_siparisler {
+    padding: 20px;
+    margin: 10px;
+    margin-left: 5px;
+    user-select: none;
+    max-height: 400px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.yeni_siparisler .siparis {
+    text-align: left; 
+    height: auto; 
+    background-color: rgba(0, 0, 0, 0.4); 
+    border-radius: 10px; 
+    padding: 5px;
+    margin-bottom: 5px;
+}
+
+.yeni_siparisler .siparis .ust{
+    color: white; 
+    display: inline-flex; 
+    align-items: center; 
+    width: 100%; 
+    padding: 0px; 
+    margin: 0px;
+}
+
+.yeni_siparisler .siparis .ust .isimlik{
+    width: 40%; 
+    padding: 0px; 
+    margin: 0px; 
+    display: inline-flex; 
+    align-items: center; 
+    font-size: 12px;
+}
+
+.yeni_siparisler .siparis .ust .butonlar{
+    width: 40%; 
+    padding: 0px; 
+    margin: 0px;
+}
+
+.yeni_siparisler .siparis .ust .butonlar button{
+    width: auto; 
+    text-align: center; 
+    float: right; 
+    color: rgb(255, 255, 255);
+    border-radius: 10px;
+    border: 0px solid;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: 5px;
+    display: inline-flex; 
+    align-items: center;
+    position: relative;
+    font-size: 14px;
+    font-weight: 700;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+}
+
+.yeni_siparisler .siparis .ust .zaman{
+    width: 20%; 
+    padding: 0px; 
+    margin: 0px;
+}
+
+.yeni_siparisler .siparis .ust .zaman-bg{
+    background: rgb(200,38,38);
+    background: linear-gradient(90deg, rgba(200,38,38,1) 0%, rgba(38,200,173,1) 100%);
+    padding: 0px;
+    margin: 0px;
+    width: 80px;
+    height: 10px;
+    position: relative;
+    border-radius: 5px;
+}
+
+.yeni_siparisler .siparis .ust .zaman-oran{
+    background: rgba(255, 255, 255, 0.75);
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+    height: 10px;
+    position: absolute;
+    border-radius: 5px;
+    border-left: 5px blue solid;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    right: 0px;
+    top: 0px;
+}
+
+.yeni_siparisler .siparis .ust .butonlar button:hover{
+    transform: scale(0.9);
+    opacity: 0.8;
+}
+
+.yeni_siparisler .siparis .ust .butonlar button:active{
+    opacity: 1;
+}
+
+.yeni_siparisler .siparis .siparis_urunler{
+    height: auto; 
+    background-color: rgba(255, 255, 255, 0.3); 
+    border-radius: 10px; 
+    padding: 10px; 
+    margin-top: 5px;
+}
+
+.yeni_siparisler .siparis .siparis_urunler .urun{
+    width: 65px; 
+    height: auto; 
+    background-color: white; 
+    border-radius: 10px; 
+    padding: 5px; 
+    text-align: center; 
+    display: inline-block;
+    margin-left: 5px;
+    position: relative;
+}
+
+.yeni_siparisler .siparis .siparis_urunler .urun:hover{
+    transform: scale(0.9);
+    opacity: 0.8;
+}
+
+.yeni_siparisler .siparis .siparis_urunler .urun img{
+    width: 80%;
+}
+
+.yeni_siparisler .siparis .siparis_urunler .urun p{
+    font-size: 9px; 
+    overflow: hidden; 
+    white-space: nowrap; 
+    text-overflow: ellipsis; 
+    margin: 0px; 
+    padding: 1px; 
+    line-height: 9px;
+}
+
+.yeni_siparisler .siparis .siparis_urunler .urun .urun-ok{
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    background-color: rgba(255, 255, 255, 0.7);
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+}
+
+.yeni_siparisler .siparis .siparis_urunler .urun .urun-ok img{
+    width: 80%;
+}
+
+.market_urunler {
+    padding: 20px;
+    margin: 10px;
+    margin-left: 5px;
+    user-select: none;
+    max-height: 400px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.market_urunler .urun {
+    width: 100%;
+    height: auto;
+    padding: 5px;
+    background-color: rgba(0, 0, 0, 0.4);
+    color: white;
+    border-radius: 10px;
+    align-items: center;
+    margin-bottom: 5px;
+    transition: transform 0.3s ease;
+}
+
+.market_urunler .urun .icon{
+    width: 35px;
+    height: 35px;
+    margin-right: 5px;
+}
+
+.market_urunler .urun .urunBilgisi{
+    width: 69.99%;
+    text-align: left;
+    align-items: center;
+    position: relative;
+    display: inline-flex; 
+    font-size: 13px;
+}
+
+.market_urunler .urun button{
+    background: rgb(196,159,238); 
+    background: linear-gradient(180deg, rgba(196,159,238,1) 0%, rgba(38,28,158,1) 100%);
+    color: rgb(255, 255, 255);
+    border-radius: 10px;
+    border: 0px solid;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 30%;
+    margin: 0px;
+    display: inline-flex; 
+    align-items: center;
+    position: relative;
+    font-size: 12px;
+    font-weight: 700;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+}
+
+.market_urunler .urun button:hover{
+    transform: scale(0.9);
+    opacity: 0.8;
+}
+
+.market_urunler .urun button:active{
+    opacity: 1;
+}
+
+.market_urunler .urun button img{
+    width: 25px;
+    height: 25px;
+    margin-right: 10px;
+}
+
+.urunler {
+    padding: 20px;
+    user-select: none;
+}
+
+.urunler .urun {
+    width: 130px;
+    height: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: white;
+    border-radius: 20px;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-left: 5px;
+    margin-bottom: 5px;
+    transition: transform 0.3s ease;
+}
+
+.urunler .urun:hover {
+    transform: scale(0.9);
+    opacity: 0.9;
+}
+
+.urunler .urun:active {
+    transform: scale(0.9);
+}
+
+
+.urunler .urun img {
+    width: 50%;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    padding: 15px;
+}
+
+.urunler .urun p {
+    width: 100%;
+    margin: 0;
+    margin-top: 7px;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.bg-gradient-purple{
+    background: rgb(213,201,255);
+    background: radial-gradient(circle, rgba(213,201,255,1) 0%, rgba(255,255,255,1) 50%);
+}
+
+.bg-gradient-green{
+    background: rgb(38,200,173);
+    background: linear-gradient(0deg, rgba(38,200,173,1) 0%, rgba(0,96,69,1) 100%) !important;
+    color: rgb(255, 255, 255);
+}
+
+.bg-gradient-red{
+    background: rgb(238,159,159);
+    background: linear-gradient(0deg, rgba(238,159,159,1) 0%, rgba(158,28,28,1) 100%) !important;
+    color: rgb(255, 255, 255);
+}
+
+.bg-gradient-disabled{
+    background: rgb(149,149,149);
+    background: radial-gradient(circle, rgba(149,149,149,1) 0%, rgba(255,255,255,1) 50%);
+    filter: grayscale(100%);
+}
+
+.animasyonluResim {
+    width: 150px;
+    height: 150px;
+    height: auto;
+    transition: transform 3s ease-in-out;
+    animation: zoom 3s infinite alternate;
+}
+
+@keyframes zoom {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(0.8);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+#nasilOynanir{
+    display: none; 
+    width: 900px; 
+    height: 800px; 
+    padding: 20px; 
+    border: 0px solid black; 
+    background: #f3f3f3; 
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    border-radius: 15px;
+}
+
+#nasilOynanirIcerik{
+    border-radius: 15px; 
+    padding: 10px; 
+    width: 100%; 
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+#nasilOynanirIcerik img{
+    border-radius: 15px;
+}
+
+#nasilOynanirIcerik video{
+    border-radius: 15px;
+}
+
+#nasilOynanirIcerik h1{
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#nasilOynanirIcerik h1 img{
+    margin-bottom: 10px;
+}
+
+#nasilOynanirIcerik h3{
+    margin-bottom: 20px;
+}
+
+#nasilOynanirIcerik p{
+    margin-bottom: 20px;
+}
+
+#nasilOynanirIcerik hr{
+    margin-bottom: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+#gameDiv{
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    width: 900px; 
+    height: 800px; 
+    border: 0px solid black; 
+    background-image: url('images/mobilyalar/mutfak-bg.png'); 
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    border-radius: 15px;
+}
+
+#gameDiv div{
+    text-align: center;
+}
+
+#diller img{
+    width: 55px; 
+    height: 55px;
+}
+
+.sayfa{
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+}
+
+.oyun-ekrani{
+    position: relative;
+}
